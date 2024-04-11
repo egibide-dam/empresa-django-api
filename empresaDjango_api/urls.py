@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from appEmpresaDjango import urls as appEmpresaDjangoUrls
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(appEmpresaDjangoUrls)),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
 ]

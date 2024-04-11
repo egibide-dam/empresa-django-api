@@ -3,12 +3,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from .models import Departamento
+from .permissions import ReadOnlyPermission
 from .serializers import DepartamentoSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class DepartamentoListApiView(APIView):
     # add permission to check if user is authenticated
-    #permission_classes = [permissions.IsAuthenticated]
-
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [ReadOnlyPermission]
+    #permission_classes = {"get": [permissions.AllowAny], "post": [permissions.IsAuthenticated]}
     # 1. List all
     def get(self, request, *args, **kwargs):
         '''
@@ -37,8 +41,8 @@ class DepartamentoListApiView(APIView):
 
 class DepartamentoDetailApiView(APIView):
     # add permission to check if user is authenticated
-    #permission_classes = [permissions.IsAuthenticated]
-
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [ReadOnlyPermission]
     def get_object(self, departamento_id):
         '''
         Helper method to get the object with given id
