@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'drf_yasg',
     'rest_framework',
     'djoser',
-    'appEmpresaDjango'
+    'appEmpresaDjango',
 ]
 
 MIDDLEWARE = [
@@ -134,13 +135,25 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication'),
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.openapi.AutoSchema',  # drf-spectacular settings
+    #'DEFAULT_AUTHENTICATION_CLASSES': (
+    #    'rest_framework_simplejwt.authentication.JWTAuthentication'),
+    #'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.openapi.AutoSchema',  # drf-spectacular settings
 }
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic'
+        },
+        'Authorization':{
+            'type': 'apiKey',
+            'name': 'Authorization',
+        }
+    }
 }
