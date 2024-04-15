@@ -206,3 +206,5 @@ Temporary Items
 !.idea/runConfigurations
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,intellij,pycharm+all
+
+.idea/
