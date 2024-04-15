@@ -3,12 +3,12 @@
 help: _header
 	${info }
 	@echo Opciones:
-	@echo ----------------------------------------
+	@echo ----------------------
 	@echo build
-	@echo start
+	@echo start / stop / restart
 	@echo workspace
 	@echo clean
-	@echo ----------------------------------------
+	@echo ----------------------
 
 _header:
 	@echo ----------
@@ -28,6 +28,11 @@ _start-command:
 	@docker compose up -d
 
 start: _start-command _urls
+
+stop:
+	@docker compose stop
+
+restart: stop start
 
 workspace:
 	@docker compose exec django /bin/bash
