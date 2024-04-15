@@ -208,3 +208,5 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/macos,intellij,pycharm+all
 
 .idea/
+
+**/__pycache__/
