@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -23,6 +24,7 @@ class DepartamentoListApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # 2. Create
+    @swagger_auto_schema(request_body=DepartamentoSerializer)
     def post(self, request, *args, **kwargs):
         '''
         Create the Departamento with given data
@@ -68,6 +70,7 @@ class DepartamentoDetailApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # 4. Update
+    @swagger_auto_schema(request_body=DepartamentoSerializer)
     def put(self, request, departamento_id, *args, **kwargs):
         '''
         Updates the departamento item with given id if exists
@@ -122,6 +125,7 @@ class HabilidadListApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # 2. Create
+    @swagger_auto_schema(request_body=HabilidadSerializer)
     def post(self, request, *args, **kwargs):
         '''
         Create the Habilidad with given data
@@ -166,6 +170,7 @@ class HabilidadDetailApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # 4. Update
+    @swagger_auto_schema(request_body=HabilidadSerializer)
     def put(self, request, habilidad_id, *args, **kwargs):
         '''
         Updates the habilidad item with given id if exists
@@ -218,6 +223,7 @@ class EmpleadoListApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # 2. Create
+    @swagger_auto_schema(request_body=EmpleadoSerializer)
     def post(self, request, *args, **kwargs):
         '''
         Create the Empleado with given data
@@ -266,6 +272,7 @@ class EmpleadoDetailApiView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # 4. Update
+    @swagger_auto_schema(request_body=EmpleadoSerializer)
     def put(self, request, empleado_id, *args, **kwargs):
         '''
         Updates the empleado item with given id if exists
