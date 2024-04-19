@@ -15,11 +15,3 @@ class EmpleadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empleado
         fields = ["id","nombre","fecha_nacimiento","antiguedad","departamento","habilidades","created", "updated"]
-
-class UserCreateSerializer(BaseUserSerializer):
-    class Meta(BaseUserSerializer.Meta):
-        fields = ['id', 'email', 'username', 'password']
-
-class CurrentUserSerializer(UserSerializer):
-    class Meta(UserSerializer.Meta):
-        fields = ['id', 'email', 'username', 'password']

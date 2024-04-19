@@ -8,7 +8,6 @@ class Departamento(models.Model):
     updated = models.DateTimeField(auto_now=True)
     def __str__(self):
         return f"{self.nombre} ({self.telefono})"
-
     class Meta:
         verbose_name_plural = "departamentos"
         verbose_name= "departamento"
@@ -36,7 +35,6 @@ class Empleado(models.Model):
     updated = models.DateTimeField(auto_now=True)
     def __str__(self):
         return f"{self.nombre} --- {self.antiguedad}"
-
     class Meta:
         verbose_name_plural = "empleados"
         verbose_name= "empleado"
