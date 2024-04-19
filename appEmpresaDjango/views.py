@@ -29,11 +29,14 @@ class DepartamentoListApiView(APIView):
         '''
         Create the Departamento with given data
         '''
-        data = {
-            'nombre': request.data.get('nombre'),
-            'telefono': request.data.get('telefono'),
-        }
-        serializer = DepartamentoSerializer(data=data)
+        #Opcion1:
+        # data = {
+        #     'nombre': request.data.get('nombre'),
+        #     'telefono': request.data.get('telefono'),
+        # }
+        # serializer = DepartamentoSerializer(data=data)
+        #Opcion2:
+        serializer = DepartamentoSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
