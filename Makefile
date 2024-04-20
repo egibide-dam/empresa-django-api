@@ -17,9 +17,9 @@ _header:
 
 _urls:
 	${info }
-	@echo ----------------------------------------
-	@echo [Swagger] http://localhost:8000/swagger/
-	@echo ----------------------------------------
+	@echo ----------------------------------
+	@echo [Django API] http://localhost:8000
+	@echo ----------------------------------
 
 build:
 	@docker compose build --pull

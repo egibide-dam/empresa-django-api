@@ -21,6 +21,7 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
 from appEmpresaDjango import urls as appEmpresaDjangoUrls
+from empresaDjango_api import views
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -37,6 +38,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('api/', include(appEmpresaDjangoUrls)),
     path('auth/', include('djoser.urls')),

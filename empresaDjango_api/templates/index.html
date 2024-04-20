@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>EmpresaDjango API</h1>
+    <hr>
+
+    <p>Ejemplo de API REST con Django.</p>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Documentación de la API</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a class="link-primary link-underline-opacity-0 link-underline-opacity-100-hover"
+                               target="_blank" href="{% url 'schema-swagger-ui' %}">Swagger</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="link-primary link-underline-opacity-0 link-underline-opacity-100-hover"
+                               target="_blank" href="{% url 'schema-redoc' %}">Redoc</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Administración</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a class="link-primary link-underline-opacity-0 link-underline-opacity-100-hover"
+                               target="_blank" href="{% url 'admin:index' %}">Sitio de administración de Django</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
