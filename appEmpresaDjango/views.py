@@ -1,13 +1,17 @@
+from django.views.decorators.csrf import csrf_exempt
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.exceptions import ParseError
+from rest_framework.parsers import FileUploadParser, FormParser, MultiPartParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from .models import Departamento, Habilidad, Empleado
 from .permissions import ReadOnlyPermission
-from .serializers import DepartamentoSerializer, HabilidadSerializer, EmpleadoSerializer
+from .serializers import DepartamentoSerializer, HabilidadSerializer, EmpleadoSerializer, EmpleadoAvatarSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
 
 class DepartamentoListApiView(APIView):
     # add permission to check if user is authenticated
@@ -215,6 +219,7 @@ class EmpleadoListApiView(APIView):
     # add permission to check if user is authenticated
     authentication_classes = [JWTAuthentication]
     permission_classes = [ReadOnlyPermission]
+
     #permission_classes = {"get": [permissions.AllowAny], "post": [permissions.IsAuthenticated]}
     # 1. List all
     def get(self, request, *args, **kwargs):
@@ -244,7 +249,17 @@ class EmpleadoListApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+class EmpleadoImagenUpload(APIView):
+    permission_classes = (AllowAny,)
+    parser_classes = (MultiPartParser, FormParser)
+    @csrf_exempt
+    def post(self, request, empleado_id,*args, **kwargs):
+        serializer = EmpleadoAvatarSerializer(data=request.data, instance= Empleado.objects.get(id=empleado_id))
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class EmpleadoDetailApiView(APIView):
     # add permission to check if user is authenticated
@@ -311,3 +326,4 @@ class EmpleadoDetailApiView(APIView):
             {"res": "Object deleted!"},
             status=status.HTTP_200_OK
         )
+

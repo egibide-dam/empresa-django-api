@@ -1,5 +1,14 @@
-from django.db import models
+import os
+import random
+import uuid
 
+from django.db import models
+def generate_unique_name(path):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        filename = "%s.%s" % (uuid.uuid4(), ext)
+        return os.path.join(path, filename)
+    return wrapper
 # Create your models here.
 class Departamento(models.Model):
     nombre = models.CharField(max_length=60)
@@ -30,7 +39,8 @@ class Empleado(models.Model):
     fecha_nacimiento=models.DateField()
     antiguedad=models.IntegerField()
     departamento=models.ForeignKey(Departamento, on_delete=models.CASCADE) #1-N
-    habilidades= models.ManyToManyField(Habilidad, null=True) #N-M
+    habilidades= models.ManyToManyField(Habilidad,) #N-M
+    imagen = models.ImageField(upload_to= generate_unique_name("empleados/"))
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -39,3 +49,4 @@ class Empleado(models.Model):
         verbose_name_plural = "empleados"
         verbose_name= "empleado"
         ordering = ["-created"]
+

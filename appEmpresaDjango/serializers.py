@@ -15,3 +15,13 @@ class EmpleadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empleado
         fields = ["id","nombre","fecha_nacimiento","antiguedad","departamento","habilidades","created", "updated"]
+
+class EmpleadoAvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Empleado
+        fields = ["imagen"]
+
+    def save(self, *args, **kwargs):
+        if self.instance.imagen:
+            self.instance.imagen.delete()
+        return super().save(*args, **kwargs)
