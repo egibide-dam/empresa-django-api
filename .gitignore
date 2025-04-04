@@ -210,3 +210,5 @@ Temporary Items
 .idea/
 
 **/__pycache__/
+
+.env

@@ -3,8 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - PYTHON_VERSION=${PYTHON_VERSION:-3.13}
     hostname: django
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - ./app:/app
